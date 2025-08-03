@@ -1,5 +1,3 @@
-import React from 'react';
-
 function MainContent() {
   return (
     <main>
@@ -9,7 +7,3 @@ function MainContent() {
 }
 
 export default MainContent;
-<<<<<<< HEAD
-
-=======
->>>>>>> e16cb1884472f77c8a315666727f347f409aca66
