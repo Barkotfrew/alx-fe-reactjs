@@ -1,11 +1,11 @@
-// src/App.jsx
 import React from 'react';
+import UserSearch from './components/UserSearch';
 
 function App() {
   return (
     <div>
       <h1>GitHub User Search</h1>
-      <p>Start searching GitHub profiles!</p>
+      <UserSearch />
     </div>
   );
 }
