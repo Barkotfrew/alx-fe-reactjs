@@ -4,14 +4,13 @@ const AddRecipeForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     ingredients: '',
-    instructions: '',
+    steps: '', // Changed from 'instructions' to 'steps'
   });
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target; // Uses target.value
     setFormData({ ...formData, [name]: value });
-    // Clear error when typing
     if (errors[name]) setErrors({ ...errors, [name]: '' });
   };
 
@@ -19,7 +18,7 @@ const AddRecipeForm = () => {
     const newErrors = {};
     if (!formData.title.trim()) newErrors.title = 'Title is required';
     if (!formData.ingredients.trim()) newErrors.ingredients = 'Ingredients are required';
-    if (!formData.instructions.trim()) newErrors.instructions = 'Instructions are required';
+    if (!formData.steps.trim()) newErrors.steps = 'Steps are required'; // Changed from 'instructions'
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -27,8 +26,11 @@ const AddRecipeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      alert('Recipe submitted successfully!'); // Replace with actual API call
-      console.log('Form data:', formData);
+      alert('Recipe submitted successfully!');
+      console.log('Form data:', {
+        ...formData,
+        instructions: formData.steps // Maps 'steps' to 'instructions' if needed
+      });
     }
   };
 
@@ -62,20 +64,19 @@ const AddRecipeForm = () => {
           {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>}
         </div>
 
-        {/* Instructions Field */}
+        {/* Steps Field (formerly Instructions) */}
         <div>
-          <label className="block text-gray-700 mb-2">Instructions</label>
+          <label className="block text-gray-700 mb-2">Steps</label>
           <textarea
-            name="instructions"
-            value={formData.instructions}
+            name="steps" // Changed from 'instructions'
+            value={formData.steps}
             onChange={handleChange}
             rows="6"
-            className={`w-full p-2 border rounded ${errors.instructions ? 'border-red-500' : 'border-gray-300'}`}
+            className={`w-full p-2 border rounded ${errors.steps ? 'border-red-500' : 'border-gray-300'}`}
           />
-          {errors.instructions && <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition-colors"
